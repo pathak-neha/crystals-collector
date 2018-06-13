@@ -12,8 +12,10 @@ body {
     padding: 2rem;
 }
 
-.game-rules {
+#game-rules {
     font-family: 'Questrial', sans-serif;
+    padding: 2rem;
+    color: white;
 }
 
 .gem {

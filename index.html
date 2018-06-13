@@ -21,31 +21,29 @@
             crystal collector
         </div>
     </header>
+    
+    <br>
 
-
-    <div class="jumbotron" id="game-rules" style="display: block">
-        <div class="container">
-            <h1>
-                <strong>HOW TO PLAY:</strong>
-            </h1>
-            <hr class="my-4">
-            <p>
-                <ul>
-                    <li>You will be given a random number at the start of the game.</li>
-                    <li>There are four crystals (one each of blue, green, yellow, and red). By clicking on a crystal you will
-                        add a specific amount of points to your total score.</li>
-                    <li>You win the game by matching your total score to the random number, you lose the game if your total score
-                        goes above the random number.</li>
-                    <li>The value of each crystal is hidden from you until you click on it.</li>
-                    <li>Each time when the game starts, the game will change the values of the crystal.</li>
-                </ul>
-            </p>
-            <button class="btn btn-info btn-lg" id="start-button">Click to Start!</button>
-        </div>
+    <div class="container rounded bg-dark" id="game-rules" style="display: block">
+        <h1>
+            <strong>HOW TO PLAY:</strong>
+        </h1>
+        <hr class="my-4">
+        <p>
+            <ul>
+                <li>You will be given a random number at the start of the game.</li>
+                <li>There are four crystals (one each of blue, green, yellow, and red). By clicking on a crystal you will add
+                    a specific amount of points to your total score.</li>
+                <li>You win the game by matching your total score to the random number, you lose the game if your total score
+                    goes above the random number.</li>
+                <li>The value of each crystal is hidden from you until you click on it.</li>
+                <li>Each time when the game starts, the game will change the values of the crystal.</li>
+            </ul>
+        </p>
+        <button class="btn btn-info btn-lg" id="start-button">Click to Start!</button>
     </div>
 
-    <br>
-    <div class="container border-rounded bg-light" id="game-content" style="display: none">
+    <div class="container border rounded bg-light" id="game-content" style="display: none">
         <div class="row">
             <div class="col-md-12">
                 <div class="card-deck" id="counter-group">
@@ -187,6 +185,7 @@
 
                 if (randomNumber === counter) {
                     wins++;
+                    updateStats();
                     if (confirm('You win! Start a new game?')) {
                         generateGemValues();
                         alert('Remember: the gems have been assigned new values.');
@@ -194,11 +193,11 @@
                     } else {
                         alert('Ok. Thank you for playing.');
                     }
-                    updateStats();
                 };
 
                 if (counter >= (randomNumber + 1)) {
                     losses++;
+                    updateStats();
                     if (confirm('You lose. Try again?')) {
                         generateGemValues();
                         alert('Remember: the gems have been assigned new values.');
@@ -206,7 +205,6 @@
                     } else {
                         alert('Ok. Better luck next time!');
                     }
-                    updateStats();
                 };
             });
 
