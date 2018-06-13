@@ -1,0 +1,38 @@
+header {
+    background-color: #0fa7b2;
+}
+
+#header-text {
+    font-family: 'Dancing Script', cursive;
+    color: whitesmoke;
+}
+
+body {
+    background-image: url("../images/what-the-hex.png");
+}
+
+.main-content {
+    padding: 2rem;
+}
+
+.game-rules {
+    font-family: 'Questrial', sans-serif;
+}
+
+.gem {
+    height: 5rem;
+}
+
+#gems-group {
+    justify-content: center;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+#counter-title {
+    font-family: 'Questrial', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+}

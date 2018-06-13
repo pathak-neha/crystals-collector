@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Questrial" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <h1 id="header-text">
+                    crystals cullector
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <br>
+
+    <div class="container border-rounded bg-light main-content">
+        <div class="row jumbotron" id="game-rules" style="display: block">
+            <div class="col-md-12">
+                <h1>
+                    <strong>HOW TO PLAY:</strong>
+                </h1>
+                <hr class="my-4">
+                <p>
+                    <ul>
+                        <li>You will be given a random number at the start of the game.</li>
+                        <li>There are four crystals (one each of blue, green, yellow, and red). By clicking on a crystal you
+                            will add a specific amount of points to your total score.</li>
+                        <li>You win the game by matching your total score to the random number, you lose the game if your total
+                            score goes above the random number.</li>
+                        <li>The value of each crystal is hidden from you until you click on it.</li>
+                        <li>Each time when the game starts, the game will change the values of the crystal.</li>
+                    </ul>
+                </p>
+                <button class="btn btn-info btn-lg" id="start-button">Click to Start!</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="counter-group" style="display: none">
+                <div class="col-md-6">
+                    <div class="card text-center">
+                        <div class="card-header" id="counter-title">
+                            RANDOM NUMBER
+                        </div>
+                        <div class="card-body" id="random-number">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-center">
+                        <div class="card-header" id="counter-title">
+                            COUNTER
+                        </div>
+                        <div class="card-body" id="counter">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+
+        <div class="row" id="gems-group" style="display: none">
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var counter = 0;
+            var randomNumber;
+
+            var colors = ["blue", "green", "yellow", "red"];
+            for (i = 0; i < colors.length; i++) {
+                var gems = $('<img>');
+                gems.addClass("gem gem-" + colors[i]);
+                gems.attr("color", colors[i]);
+                gems.attr("src", "./assets/images/" + colors[i] + ".png");
+                $("#gems-group").append(gems);
+            }
+
+            function containRandoms(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                //The maximum is exclusive and the minimum is inclusive
+                return Math.floor(Math.random() * (max - min)) + min;
+            };
+
+            function generateGemValues() {
+
+                // Generate 4 distinct random numbers
+                var randomArr = [];
+                while (randomArr.length<4) {
+                    var n = containRandoms(1,13);
+                    if (randomArr.indexOf(n)==-1) {
+                        randomArr.push(n);
+                    }
+                }
+
+                // Assign values to gems
+                $(".gem-blue").val(randomArr[0]);
+                console.log("the value of blue is " + $(".gem-blue").val());
+                $(".gem-green").val(randomArr[1]);
+                console.log("the value of green is " + $(".gem-green").val());
+                $(".gem-yellow").val(randomArr[2]);
+                console.log("the value of yellow is " + $(".gem-yellow").val());
+                $(".gem-red").val(randomArr[3]);
+                console.log("the value of red is " + $(".gem-red").val());
+            };
+
+            function generateRandom() {
+
+                randomNumber=121;
+                while (randomNumber>120) {
+                    var blueCount = containRandoms(2,11);
+                    var greenCount = containRandoms(2,11);
+                    var yellowCount = containRandoms(2,11);
+                    var redCount = containRandoms(2,11);
+                    console.log("blueCount is "+blueCount);
+                    console.log("greenCount is "+greenCount);
+                    console.log("yellowCount is "+yellowCount);
+                    console.log("redCount is "+redCount);
+                    randomNumber = (blueCount*parseInt($(".gem-blue").val()))+(greenCount*parseInt($(".gem-green").val()))+(yellowCount*parseInt($(".gem-yellow").val()))+(redCount*parseInt($(".gem-red").val()));
+                }              
+
+                $("#random-number").val(randomNumber);
+                $("#random-number").text($("#random-number").val());
+            }
+
+            function loadScreen() {
+                $("#game-rules").hide();
+                $("#counter-group").show();
+                $("#gems-group").show();
+            }
+
+            $("#start-button").on("click", function () {
+                loadScreen();
+                generateGemValues();
+                generateRandom();
+            });
+
+            $(".gem").on("click", function () {
+                counter += parseInt($(this).val());
+                $("#counter").text(counter);
+
+                if (randomNumber===counter) {
+                    alert("You win!");
+                };
+
+                if (counter>randomNumber) {
+                    alert("You lose!");
+                };
+
+            });
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>
