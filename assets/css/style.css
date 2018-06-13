@@ -1,17 +1,14 @@
-header {
-    background-color: #0fa7b2;
-}
-
 #header-text {
     font-family: 'Dancing Script', cursive;
-    color: whitesmoke;
+    color: white;
+    font-size: 2rem;
 }
 
 body {
-    background-image: url("../images/what-the-hex.png");
+    background-image: url("../images/game-background.jpg");
 }
 
-.main-content {
+#game-content {
     padding: 2rem;
 }
 
@@ -20,7 +17,20 @@ body {
 }
 
 .gem {
-    height: 5rem;
+    height: 12rem;
+    display: flex;
+    justify-content: center;
+    text-align-last: center;
+}
+
+.gem:hover {
+    -webkit-filter: drop-shadow(5px 5px 5px #222 );
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
+.gem:active {
+    -webkit-filter: drop-shadow(10px 10px 10px #222 );
+    filter: drop-shadow(10px 10px 10px #222);
 }
 
 #gems-group {
@@ -33,6 +43,22 @@ ul {
 
 #counter-title {
     font-family: 'Questrial', sans-serif;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: bold;
+}
+
+.card {
+    margin-right: 3rem;
+}
+
+.numbers-emphasize {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 7em;
+    color: #009999;
+}
+
+#session-stats {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3em;
+    color: gray;
 }
